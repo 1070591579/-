@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">baidu_gpsmap_demo</string>
+    <string name="demo">百度地图定位Demo</string>
+    <string name="location">定位</string>
+    <string name="plan">规划</string>
+    <string name="textview">显示定位信息</string>
+    <string name="showLoc">显示定位信息</string>
+</resources>
