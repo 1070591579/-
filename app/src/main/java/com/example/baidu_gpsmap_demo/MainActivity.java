@@ -47,18 +47,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BaiduMap mBaiduMap = null; //地图管理器
     private Marker marker = null ;     //覆盖物
     private Context context;
-    //定位相关
+    // 定位相关 经纬度信息
     private double mLatitude;
     private double mLongtitude;
-    //方向传感器
+    // 方向传感器
     private MyOrientationListener mMyOrientationListener;
     private float mCurrentX;
-    //自定义图标
-    //初始化bitmap信息，不用的时候请及时回收recycle   //覆盖物图标
+    // 自定义图标
+    // 初始化bitmap信息，不用的时候请及时回收recycle   //覆盖物图标
     private BitmapDescriptor mIconLocation = BitmapDescriptorFactory.fromResource(R.drawable.location_arrows);
-    //定位服务的客户端。宿主程序在客户端声明此类，并调用，目前只支持在主线程中启动
+    // 定位服务的客户端。宿主程序在客户端声明此类，并调用，目前只支持在主线程中启动
     private LocationClient mLocationClient;
-    //是否是首次定位
+    // 是否是首次定位
     private boolean isFirstLoc  = true;
     public BDAbstractLocationListener myListener;
     private LatLng mLastLocationData;
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.initialize(this.getApplicationContext());
         switch (v.getId()) {
             case R.id.but_Loc: {
                 centerToMyLocation(mLatitude, mLongtitude);
@@ -150,9 +150,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //按钮
         Button mbut_Loc = findViewById(R.id.but_Loc);
         Button mbut_RoutrPlan = findViewById(R.id.but_RoutrPlan);
+        Button mbut_attribute = findViewById(R.id.but_attribute);
+        Button mbut_command = findViewById(R.id.but_command);
         //按钮处理
         mbut_Loc.setOnClickListener(this);
         mbut_RoutrPlan.setOnClickListener(this);
+        mbut_attribute.setOnClickListener(this);
+        mbut_command.setOnClickListener(this);
     }
 
     //定位
@@ -182,12 +186,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .direction(mCurrentX).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
-            //设置自定义图标
+            // 设置自定义图标
             MyLocationConfiguration config = new
                     MyLocationConfiguration(
                     MyLocationConfiguration.LocationMode.NORMAL, true, mIconLocation);
             mBaiduMap.setMyLocationConfiguration(config);
-            //更新经纬度
+            // 更新经纬度
             mLatitude = location.getLatitude();
             mLongtitude = location.getLongitude();
             //设置起点
@@ -218,18 +222,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //初始化定位
     private void initMyLocation() {
+        // 地图初始化
+        mBaiduMap = mMapView.getMap();
         //缩放地图
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
         mBaiduMap.setMapStatus(msu);
-        //开启定位
+        //开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         //声明LocationClient类
         mLocationClient = new LocationClient(this);
         //通过LocationClientOption设置LocationClient相关参数
         LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setIsNeedAddress(true);//设置是否需要地址信息
+        // 设置是否需要地址信息，默认为无地址
+        option.setIsNeedAddress(true);
+        option.setIsNeedLocationDescribe(true);
+        option.setIsNeedLocationPoiList(true);
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        option.setOpenGps(true);
         option.setScanSpan(1000);
         //设置locationClientOption
         mLocationClient.setLocOption(option);

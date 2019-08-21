@@ -3,59 +3,41 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.baidu_gpsmap_demo"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- 读写sd卡 -->
+
+    <!-- 读取外置存储。如果开发者使用了So动态加载功能并且把SO文件放在了外置存储区域，则需要申请该权限，否则不需要 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!-- 写sd卡 -->
+    <!-- 写外置存储。如果开发者使用了离线地图，并且数据写在外置存储区域，则需要申请该权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 获取精确GPS定位权限 -->
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
-    <!-- 获取精确gps位置 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!-- 获取粗略位置 -->
+    <!-- 以下两个权限用于Demo中定位功能展示，如果开发者实际不需要百度定位功能，可不申请 -->
+    <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 这个权限用于访问GPS定位,获取精确gps位置 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- 允许程序访问额外的定位提供者指令获取模拟定位信息 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <!-- 网络链接 -->
+    <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
     <uses-permission android:name="android.permission.INTERNET">
     </uses-permission>
-    <!-- 获取网络状态 -->
+    <!-- 获取网络状态，根据网络状态切换进行数据请求网络转换 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE">
     </uses-permission>
-    <!-- 更改wifi连状态 -->
+    <!-- 这个权限用于获取wifi的获取权限,更改wifi连状态,wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <!-- 获取wifi状态 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-
-    <!--这个权限用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--这个权限用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!--获取设备网络状态，禁用后无法获取网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--网络权限，当禁用后，无法进行检索等相关业务-->
-    <uses-permission android:name="android.permission.INTERNET" />
     <!--读取设备硬件信息，统计数据-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--读取系统信息，包含系统版本等信息，用作统计-->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <!--获取设备的网络状态，鉴权所需网络代理-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--允许sd卡写权限，需写入地图数据，禁用后无法显示地图-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 允许sd卡读权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!--这个权限用于进行网络定位-->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions"/>
-    <!--这个权限用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--统计数据-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!--使用步行AR导航，配置Camera权限-->
+    <!-- 调用相机，用于实现扫描二维码，预览个性化地图编辑器生成的个性化地图样式，开发者实际开发中地图SDK不需要该权限-->
     <uses-permission android:name="android.permission.CAMERA" />
     <!--程序在手机屏幕关闭后后台进程仍然运行-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <dist:module dist:instant="true" />
@@ -72,7 +54,11 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="gdyu2hLGyBeY8yUmIbLwUQnDMFbZjZxF" >
         </meta-data>
-        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.6"></action>
+            </intent-filter>
+        </service>
         <!--<receiver android:name=".NetWorkStateReceiver">-->
             <!--<intent-filter>-->
                 <!--//检测网络变化的acton-->

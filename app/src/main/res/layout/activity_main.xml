@@ -8,17 +8,14 @@
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/b_map_View"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/demo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"></com.baidu.mapapi.map.MapView>
+        app:layout_constraintTop_toTopOf="parent"></com.baidu.mapapi.map.MapView>
 
     <!--<TextView-->
     <!--android:id="@+id/showView"-->
@@ -33,17 +30,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="656dp"
+        android:layout_marginBottom="500dp"
+        android:background="@android:color/white"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/b_map_View"
-        app:layout_constraintVertical_bias="0.82">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/but_Loc"
@@ -51,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/location"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:ignore="ButtonStyle" />
 
         <Button
