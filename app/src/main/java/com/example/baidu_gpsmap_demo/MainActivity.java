@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView locationText = null;   //显示位置信息的TextView
     private MapView mMapView = null;   //显示地图的控件
     private BaiduMap mBaiduMap = null; //地图管理器
-    private Marker marker = null ;     //覆盖物
+    private Marker marker = null;     //覆盖物
     private Context context;
     // 定位相关 经纬度信息
     private double mLatitude;
@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isFirstLoc  = true;
     public BDAbstractLocationListener myListener;
     private LatLng mLastLocationData;
-
+    private int isShow = View.VISIBLE;
+    private View myView = null;
     // 路线规划相关
     private RoutePlanSearch mSearch = null;
     NetWorkStateReceiver netWorkStateReceiver;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.context = this;
+        myView = findViewById(R.id.view_attribute);
         mMapView = findViewById(R.id.b_map_View);
         //获取地图控件引用
         mBaiduMap = mMapView.getMap();
@@ -142,6 +144,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 StarRoute();
                 break;
             }
+            case R.id.but_Attribute: {
+                ShowViewAttribute(v);
+                break;
+            }
+            case R.id.but_Command: {
+                ShowViewCommand(v);
+                break;
+            }
         }
     }
 
@@ -150,13 +160,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //按钮
         Button mbut_Loc = findViewById(R.id.but_Loc);
         Button mbut_RoutrPlan = findViewById(R.id.but_RoutrPlan);
-        Button mbut_attribute = findViewById(R.id.but_attribute);
-        Button mbut_command = findViewById(R.id.but_command);
+        Button mbut_Attribute = findViewById(R.id.but_Attribute);
+        Button mbut_Command = findViewById(R.id.but_Command);
         //按钮处理
         mbut_Loc.setOnClickListener(this);
         mbut_RoutrPlan.setOnClickListener(this);
-        mbut_attribute.setOnClickListener(this);
-        mbut_command.setOnClickListener(this);
+        mbut_Attribute.setOnClickListener(this);
+        mbut_Command.setOnClickListener(this);
     }
 
     //定位
@@ -253,14 +263,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLocationClient.start();
     }
 
-    //回到定位中心
-    private void centerToMyLocation(double latitude, double longtitude) {
-        mBaiduMap.clear();
-        mLastLocationData = new LatLng(latitude, longtitude);
-        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(mLastLocationData);
-        mBaiduMap.animateMapStatus(msu);
-    }
-
     //传感器
     private void initOrientation() {
         //传感器
@@ -327,6 +329,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    //回到定位中心
+    private void centerToMyLocation(double latitude, double longtitude) {
+        mBaiduMap.clear();
+        mLastLocationData = new LatLng(latitude, longtitude);
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(mLastLocationData);
+        mBaiduMap.animateMapStatus(msu);
+    }
     //开始规划
     private void StarRoute() {
         SDKInitializer.initialize(getApplicationContext());
@@ -337,5 +346,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .from(stNode)
                 .to(enNode));
     }
+    // 属性View显示
+    private void ShowViewAttribute(View v) {
+        Toast.makeText(getApplicationContext(), "按钮被点击了", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "ShowViewAttribute+进入函数");
+//        if(this.isShow == myView.VISIBLE){
+//            mView.setVisibility(myView.GONE);
+//            Log.d(TAG, "ShowViewAttribute+函数内部");
+//        }else {
+//            mView.setVisibility(mView.VISIBLE);
+//        }
+    }
+    private void ShowViewCommand(View v) {
+        Log.d(TAG, "ShowViewCommand+进入函数");
+    }
 }
+
 
