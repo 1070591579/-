@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,13 +29,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </com.baidu.mapapi.map.MapView>
-
-    <View
-        android:id="@+id/view_attribute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="visible" />
 
     <TableLayout
         android:id="@+id/tableLayout2"
@@ -153,37 +146,46 @@
                     android:id="@+id/but_Loc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/location"
                     android:layout_weight="1"
+                    android:text="@string/location"
                     tools:ignore="ButtonStyle" />
 
                 <Button
                     android:id="@+id/but_RoutrPlan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/plan"
                     android:layout_weight="1"
+                    android:text="@string/plan"
                     tools:ignore="ButtonStyle" />
 
                 <Button
                     android:id="@+id/but_Attribute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/attribute"
                     android:layout_weight="1"
+                    android:text="@string/attribute"
                     tools:ignore="ButtonStyle" />
 
                 <Button
                     android:id="@+id/but_Command"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/command"
                     android:layout_weight="1"
+                    android:text="@string/command"
                     tools:ignore="ButtonStyle" />
             </LinearLayout>
         </TableRow>
     </TableLayout>
 
-	</LinearLayout>
+    <View
+        android:id="@+id/view_attribute"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:background="#FFC107"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/b_map_View"
+        app:layout_constraintTop_toTopOf="@+id/b_map_View" />
 
 
+</androidx.constraintlayout.widget.ConstraintLayout>

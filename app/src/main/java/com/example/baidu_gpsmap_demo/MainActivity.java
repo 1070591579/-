@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private class MyLocationListener extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-            Log.d(TAG, "BDLocationListener -> onReceiveLocation");
+            //Log.d(TAG, "BDLocationListener -> onReceiveLocation");
             String addr; //定位结果
             //mapView 销毁后不在处理新接收的位置
             if (location == null || mMapView == null) {
@@ -350,16 +350,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void ShowViewAttribute(View v) {
         Toast.makeText(getApplicationContext(), "按钮被点击了", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "ShowViewAttribute+进入函数");
-//        if(this.isShow == myView.VISIBLE){
-//            mView.setVisibility(myView.GONE);
-//            Log.d(TAG, "ShowViewAttribute+函数内部");
-//        }else {
-//            mView.setVisibility(mView.VISIBLE);
-//        }
+        if(myView.getVisibility() == View.VISIBLE){
+            //myView.setVisibility(View.INVISIBLE);
+            Log.d(TAG, "ShowViewAttribute+LEFT" + myView.getLeft());
+            myView.setVisibility(View.INVISIBLE);
+            Log.d(TAG, "ShowViewAttribute+函数内部");
+        }else {
+            myView.setVisibility(View.VISIBLE);
+            Log.d(TAG, "ShowViewAttribute+函数内部2");
+        }
     }
     private void ShowViewCommand(View v) {
         Log.d(TAG, "ShowViewCommand+进入函数");
     }
+
+    //无任何效果的弹窗
+   /* private void showNoneEffect() {
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View vPopupWindow = inflater.inflate(R.layout.popupwindow, null, false);//引入弹窗布局
+        popupWindow = new PopupWindow(vPopupWindow, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
+        //引入依附的布局
+        View parentView = LayoutInflater.from(PopupWindowActivity.this).inflate(R.layout.layout_popupwindow, null);
+        //相对于父控件的位置（例如正中央Gravity.CENTER，下方Gravity.BOTTOM等），可以设置偏移或无偏移
+        popupWindow.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
+    }*/
 }
 
 
