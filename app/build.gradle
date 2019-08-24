@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
+
     defaultConfig {
         applicationId "com.example.baidu_gpsmap_demo"
         minSdkVersion 21
@@ -11,7 +12,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    sourceSets {
+    packagingOptions {
+        exclude 'lib/armeabi/libvinit.so'
+        exclude 'lib/armeabi-v7a/libvinit.so'
+    }
+        sourceSets {
         main {
             jniLibs.srcDirs = ['Libs']
         }
@@ -29,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'com.android.support:support-v4:28.0.3'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
