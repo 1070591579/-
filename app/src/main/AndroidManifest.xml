@@ -54,18 +54,11 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="gdyu2hLGyBeY8yUmIbLwUQnDMFbZjZxF" >
         </meta-data>
-        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
-            <intent-filter>
-                <action android:name="com.baidu.location.service_v2.6"></action>
-            </intent-filter>
+        <service android:name="com.baidu.location.f"
+                 android:enabled="true"
+                 android:process=":remote">
         </service>
-        <!--<receiver android:name=".NetWorkStateReceiver">-->
-            <!--<intent-filter>-->
-                <!--//检测网络变化的acton-->
-                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
