@@ -245,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ShowViewCommand(v);
                 break;
             }
+            default:
         }
     }
 
@@ -284,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLocationClient.start();
     }
 
-    //传感器
+    //传感器初始化
     private void initOrientation() {
         //传感器
         mMyOrientationListener = new MyOrientationListener(context);
